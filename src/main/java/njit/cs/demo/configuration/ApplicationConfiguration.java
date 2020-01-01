@@ -12,8 +12,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @ComponentScan(basePackages = {"njit.cs.demo"})              
 @PropertySource( ignoreResourceNotFound=true, value= {
-	"classpath:WebAppProject.properties",	
-	"file:///${APPCONF}/SpringService/WebAppProject.properties"   
+	"classpath:Registration.properties",	
+	"file:///${APPCONF}/SpringService/Registration.properties"   
 })
 
 @EnableCaching
