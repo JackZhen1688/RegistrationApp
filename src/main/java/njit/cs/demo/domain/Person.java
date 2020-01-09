@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -53,12 +54,18 @@ public class Person implements Serializable {
 	private Date birthDay;
 	
 	
-	//Person(Foreign key:PERT_ID) --> Phones(Primary key:PERT_ID)
-	//@OneToOne  (cascade = {CascadeType.ALL}) 
-    @Column(name = "\"PERT_ID\"")
-    private Long pertId;
+    /*--------------------------------------
+     * Ignore when column is used by mapping
+     *--------------------------------------*/
+    //@Column(name = "\"PERT_ID\"", insertable=false, updatable=false)
+    //private Long pertId;
     
-    //Person(Primary key:PER_ID) --> Phones(Foreign key:PER_ID)
+	//Person(Foreign key:PERT_ID) --> PersonType(Primary key:PERT_ID)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "\"PERT_ID\"")
+    private PersonType personType;
+    
+    //Person(Primary key:PER_ID) --> EmgContact(Foreign key:PER_ID)
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)     
 	private EmgContact emgContact;                                          
 

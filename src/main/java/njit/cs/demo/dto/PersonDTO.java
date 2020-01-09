@@ -5,10 +5,10 @@ import java.util.List;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Lists;
-import lombok.Data;
 import njit.cs.demo.util.CustomDateDeserializer;
 import njit.cs.demo.util.CustomDateSerializer;
 
+import lombok.Data;
 
 @Data
 public class PersonDTO {
@@ -24,6 +24,7 @@ public class PersonDTO {
 	@JsonSerialize(using   = CustomDateSerializer.class)
 	private Date birthDay;
 	
+	private PersonTypeDTO personType;
 	private EmgContactDTO emgContact; 
     private List<PhonesDTO> phones = Lists.newArrayList();  
     

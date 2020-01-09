@@ -12,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
 import njit.cs.demo.domain.EmgContact;
 import njit.cs.demo.domain.Person;
+import njit.cs.demo.domain.PersonType;
 import njit.cs.demo.domain.Phones;
 import njit.cs.demo.dto.EmgContactDTO;
 import njit.cs.demo.dto.PersonDTO;
+import njit.cs.demo.dto.PersonTypeDTO;
 import njit.cs.demo.dto.PhonesDTO;
 import njit.cs.demo.repository.EmgRepository;
 import njit.cs.demo.repository.PersonRepository;
@@ -79,7 +81,8 @@ public class PersonService {
 			try {
 						
 				personDTO.setId(person.getId());	
-				personDTO.setPertId(person.getPertId());
+				//personDTO.setPertId(person.getPertId());
+				personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
 				personDTO.setUserId(person.getUserId());
 				personDTO.setPassword(person.getPassword());
 				personDTO.setSsn(person.getSsn());
@@ -98,6 +101,18 @@ public class PersonService {
 		}
 	};
 	
+	private Function<PersonType, PersonTypeDTO> toPersonTypeDTO = new Function<PersonType, PersonTypeDTO>() {
+		@Override
+		public PersonTypeDTO apply(PersonType personType) {
+			    PersonTypeDTO personTypeDTO = new PersonTypeDTO();
+				if (personType != null) {
+					personTypeDTO.setId(personType.getId());
+					personTypeDTO.setPersonType(personType.getPersonType());
+				}
+				return personTypeDTO;
+			}
+	};
+
 	private Function<EmgContact, EmgContactDTO> toEmgContactDTO = new Function<EmgContact, EmgContactDTO>() {
 		@Override
 		public EmgContactDTO apply(EmgContact emgContact) {
@@ -145,7 +160,7 @@ public class PersonService {
 		public Person apply(PersonDTO personDTO) 
 		{
 			Person person = new Person();
-			person.setPertId(personDTO.getPertId());
+			//person.setPertId(personDTO.getPertId());
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -190,7 +205,7 @@ public class PersonService {
 		@Override
 		public void accept(PersonDTO personDTO, Person person) {
 	
-		    person.setPertId(personDTO.getPertId());
+		    //person.setPertId(personDTO.getPertId());
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
