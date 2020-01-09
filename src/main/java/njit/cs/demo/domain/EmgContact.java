@@ -41,55 +41,5 @@ public class EmgContact {
 	@JoinColumn(name="\"PER_ID\"", nullable=false)
 	private Person person;
 	
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getCtName() {
-		return ctName;
-	}
-
-	public void setCtName(String ctName) {
-		this.ctName = ctName;
-	}
-
-	public String getCtRelation() {
-		return ctRelation;
-	}
-
-	public void setCtRelation(String ctRelation) {
-		this.ctRelation = ctRelation;
-	}
-
-	public String getCtPhone() {
-		return ctPhone;
-	}
-
-	public void setCtPhone(String ctPhone) {
-		this.ctPhone = ctPhone;
-	}
-
-	public String getCtEmail() {
-		return ctEmail;
-	}
-
-	public void setCtEmail(String ctEmail) {
-		this.ctEmail = ctEmail;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	
 	
 }

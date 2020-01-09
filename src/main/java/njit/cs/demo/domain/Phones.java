@@ -38,39 +38,5 @@ public class Phones implements Serializable {
     @JoinColumn(name = "\"PER_ID\"", nullable = false)
     private Person person;
 
-    
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Long getPtyId() {
-		return ptyId;
-	}
-
-	public void setPtyId(Long ptyId) {
-		this.ptyId = ptyId;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-
 
 }

@@ -22,24 +22,4 @@ public class PhoneType implements Serializable {
 	@Column(name="\"PHONE_TYPE\"")
 	private String phoneType;
 	
-	
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPhoneType() {
-		return phoneType;
-	}
-
-	public void setPhoneType(String phoneType) {
-		this.phoneType = phoneType;
-	}
-	
-	
-
 }
