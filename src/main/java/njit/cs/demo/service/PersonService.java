@@ -83,7 +83,7 @@ public class PersonService {
 			try {
 						
 				personDTO.setId(person.getId());	
-				//personDTO.setPertId(person.getPertId());  //Modify later..
+				//personDTO.setPertId(person.getPertId());  
 				personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
 				personDTO.setUserId(person.getUserId());
 				personDTO.setPassword(person.getPassword());
@@ -174,7 +174,8 @@ public class PersonService {
 		public Person apply(PersonDTO personDTO) 
 		{
 			Person person = new Person();
-			//person.setPertId(personDTO.getPertId());   //Modify later..
+			//person.setPertId(personDTO.getPertId());   
+			person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -198,6 +199,16 @@ public class PersonService {
 		}
 	};	
     
+	Function<PersonTypeDTO, PersonType> toNewPersonTypeDomain = new Function<PersonTypeDTO, PersonType>() {
+		
+	    @Override
+	    public PersonType apply(PersonTypeDTO personTypeDTO) {
+	    	PersonType personType = new PersonType();
+	    	personType.setType(personTypeDTO.getType());
+
+			return personType;
+	    }
+	}; 	
 	
 	//5.Update a Existing Person
 	public PersonDTO personUpdate(PersonDTO personDTO) {
@@ -219,7 +230,8 @@ public class PersonService {
 		@Override
 		public void accept(PersonDTO personDTO, Person person) {
 	
-		    //person.setPertId(personDTO.getPertId());   //Modify later ..
+		    //person.setPertId(personDTO.getPertId());   
+			person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -265,7 +277,7 @@ public class PersonService {
 	    	emgContact.setCtRelation(emgContactDTO.getCtRelation());
 	    	emgContact.setCtPhone(emgContactDTO.getCtPhone());
 	    	emgContact.setCtEmail(emgContactDTO.getCtEmail());
-
+	    	
 			return emgContact;
 	    }
 	};  
@@ -286,12 +298,23 @@ public class PersonService {
 	    @Override
 	    public Phones apply(PhonesDTO phonesDTO) {
 			Phones phones = new Phones();
-			//phones.setPtyId(phonesDTO.getPtyId());  ?? modify later..
+			//phones.setPtyId(phonesDTO.getPtyId()); 
+			phones.setPhoneType(toNewPhoneTypeDomain.apply(phonesDTO.getPhoneType()));
 			phones.setPhone(phonesDTO.getPhone());
 
 			return phones;
 	    }
 	};    
+	
+	Function<PhoneTypeDTO, PhoneType> toNewPhoneTypeDomain = new Function<PhoneTypeDTO, PhoneType>() {
+		
+	    @Override
+	    public PhoneType apply(PhoneTypeDTO phoneTypeDTO) {
+	    	PhoneType phoneType = new PhoneType();
+	    	phoneType.setType(phoneTypeDTO.getType());
 
+			return phoneType;
+	    }
+	}; 	
 	
 }
