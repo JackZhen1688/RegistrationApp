@@ -2,6 +2,7 @@ package njit.cs.demo.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,9 +30,6 @@ public class Phones implements Serializable {
 	@Column(name="\"PH_ID\"", unique=true, nullable=false)         
 	private Long id;                                   	    
 	
-    @Column(name = "\"PTY_ID\"")
-    private Long ptyId;
-    
     @Column(name="\"PHONE\"")
 	private String phone;
 	
@@ -38,5 +37,10 @@ public class Phones implements Serializable {
     @JoinColumn(name = "\"PER_ID\"", nullable = false)
     private Person person;
 
+    //@Column(name = "\"PTY_ID\"")
+    //private Long ptyId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "\"PTY_ID\"")
+    private PhoneType phoneType;
 
 }

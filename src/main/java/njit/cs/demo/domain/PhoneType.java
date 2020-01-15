@@ -4,7 +4,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import njit.cs.demo.domain.Phones;
 
 import lombok.Data;
 
@@ -21,5 +23,8 @@ public class PhoneType implements Serializable {
 	                                                             
 	@Column(name="\"PHONE_TYPE\"")
 	private String phoneType;
+	
+	@OneToOne(mappedBy = "phoneType")
+    private Phones phone;
 	
 }

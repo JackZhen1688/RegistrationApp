@@ -13,10 +13,12 @@ import lombok.extern.log4j.Log4j2;
 import njit.cs.demo.domain.EmgContact;
 import njit.cs.demo.domain.Person;
 import njit.cs.demo.domain.PersonType;
+import njit.cs.demo.domain.PhoneType;
 import njit.cs.demo.domain.Phones;
 import njit.cs.demo.dto.EmgContactDTO;
 import njit.cs.demo.dto.PersonDTO;
 import njit.cs.demo.dto.PersonTypeDTO;
+import njit.cs.demo.dto.PhoneTypeDTO;
 import njit.cs.demo.dto.PhonesDTO;
 import njit.cs.demo.repository.EmgRepository;
 import njit.cs.demo.repository.PersonRepository;
@@ -81,7 +83,7 @@ public class PersonService {
 			try {
 						
 				personDTO.setId(person.getId());	
-				//personDTO.setPertId(person.getPertId());
+				//personDTO.setPertId(person.getPertId());  //Modify later..
 				personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
 				personDTO.setUserId(person.getUserId());
 				personDTO.setPassword(person.getPassword());
@@ -136,7 +138,8 @@ public class PersonService {
 
 			if (phones != null) {
 				phonesDTO.setId(phones.getId());
-				phonesDTO.setPtyId(phones.getPtyId());
+				//phonesDTO.setPtyId(phones.getPtyId());
+				phonesDTO.setPhoneType(toPhoneTypeDTO.apply(phones.getPhoneType()));
 				phonesDTO.setPhone(phones.getPhone());
 			}
 
@@ -144,7 +147,18 @@ public class PersonService {
 		}
     };
     
- 
+	private Function<PhoneType, PhoneTypeDTO> toPhoneTypeDTO = new Function<PhoneType, PhoneTypeDTO>() {
+		@Override
+		public PhoneTypeDTO apply(PhoneType phoneType) {
+			    PhoneTypeDTO phoneTypeDTO = new PhoneTypeDTO();
+				if (phoneType != null) {
+					phoneTypeDTO.setId(phoneType.getId());
+					phoneTypeDTO.setPhoneType(phoneType.getPhoneType());
+				}
+				return phoneTypeDTO;
+			}
+	};
+	
     //4.Create a New Person 
 	public PersonDTO personCreate(PersonDTO personDTO) {
 		
@@ -160,7 +174,7 @@ public class PersonService {
 		public Person apply(PersonDTO personDTO) 
 		{
 			Person person = new Person();
-			//person.setPertId(personDTO.getPertId());
+			//person.setPertId(personDTO.getPertId());   //Modify later..
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -205,7 +219,7 @@ public class PersonService {
 		@Override
 		public void accept(PersonDTO personDTO, Person person) {
 	
-		    //person.setPertId(personDTO.getPertId());
+		    //person.setPertId(personDTO.getPertId());   //Modify later ..
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -272,7 +286,7 @@ public class PersonService {
 	    @Override
 	    public Phones apply(PhonesDTO phonesDTO) {
 			Phones phones = new Phones();
-			phones.setPtyId(phonesDTO.getPtyId());
+			//phones.setPtyId(phonesDTO.getPtyId());  ?? modify later..
 			phones.setPhone(phonesDTO.getPhone());
 
 			return phones;

@@ -10,5 +10,5 @@ public class PhonesDTO {
     private Long ptyId;
 	private String phone;
 
-    
+	private PhoneTypeDTO phoneType;
 }
