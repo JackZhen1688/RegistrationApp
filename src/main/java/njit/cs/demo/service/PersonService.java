@@ -109,7 +109,7 @@ public class PersonService {
 			    PersonTypeDTO personTypeDTO = new PersonTypeDTO();
 				if (personType != null) {
 					personTypeDTO.setId(personType.getId());
-					personTypeDTO.setPersonType(personType.getPersonType());
+					personTypeDTO.setType(personType.getType());
 				}
 				return personTypeDTO;
 			}
@@ -153,7 +153,7 @@ public class PersonService {
 			    PhoneTypeDTO phoneTypeDTO = new PhoneTypeDTO();
 				if (phoneType != null) {
 					phoneTypeDTO.setId(phoneType.getId());
-					phoneTypeDTO.setPhoneType(phoneType.getPhoneType());
+					phoneTypeDTO.setType(phoneType.getType());
 				}
 				return phoneTypeDTO;
 			}

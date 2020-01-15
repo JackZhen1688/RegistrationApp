@@ -38,7 +38,7 @@ public class PhoneTypeService {
 			try {
 						
 				phoneTypeDTO.setId(phoneType.getId());
-				phoneTypeDTO.setPhoneType(phoneType.getPhoneType());
+				phoneTypeDTO.setType(phoneType.getType());
 
 			}catch(Exception e) {
 				//log.error(e.getMessage());

@@ -22,7 +22,7 @@ public class PhoneType implements Serializable {
 	private Long id;                                   	    
 	                                                             
 	@Column(name="\"PHONE_TYPE\"")
-	private String phoneType;
+	private String type;
 	
 	@OneToOne(mappedBy = "phoneType")
     private Phones phone;

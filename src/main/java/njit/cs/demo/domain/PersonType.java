@@ -27,7 +27,7 @@ public class PersonType implements Serializable {
 		private Long id;                                   	    
 		                                                             
 		@Column(name="\"PERSON_TYPE\"")
-		private String personType;
+		private String type;
 
 		@OneToOne(mappedBy = "personType")
 	    private Person person;

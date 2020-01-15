@@ -39,7 +39,7 @@ public class PersonTypeService {
 			try {
 						
 				personTypeDTO.setId(personType.getId());
-				personTypeDTO.setPersonType(personType.getPersonType());
+				personTypeDTO.setType(personType.getType());
 
 			}catch(Exception e) {
 				//log.error(e.getMessage());

@@ -7,6 +7,6 @@ import lombok.Data;
 public class PhoneTypeDTO {
 
 	private Long id;                                   	    
-	private String phoneType;
+	private String type;
 
 }

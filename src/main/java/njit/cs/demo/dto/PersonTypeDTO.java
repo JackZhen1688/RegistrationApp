@@ -7,6 +7,6 @@ import lombok.Data;
 public class PersonTypeDTO {
 
 	private Long id;                                   	    
-	private String personType;
+	private String type;
 	
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 public class PhonesDTO {
 
 	private Long id;   
-    private Long ptyId;
+    //private Long ptyId;  <-- Ignore mapping column
 	private String phone;
 
 	private PhoneTypeDTO phoneType;

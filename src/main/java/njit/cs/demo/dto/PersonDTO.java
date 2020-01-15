@@ -14,7 +14,7 @@ import lombok.Data;
 public class PersonDTO {
 
 	private Long id;     
-    private Long pertId;
+    //private Long pertId; <-- Ignore mapping column
 	private String userId;
 	private String password;
 	private String firstName;

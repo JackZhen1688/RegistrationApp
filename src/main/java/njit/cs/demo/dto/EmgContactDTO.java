@@ -11,6 +11,6 @@ public class EmgContactDTO {
 	private String ctRelation;
 	private String ctPhone;
 	private String ctEmail;
-	private String perId;
+	//private String perId;  <-- Ignore mapping column
 	
 }
