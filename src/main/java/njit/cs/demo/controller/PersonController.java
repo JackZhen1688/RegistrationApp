@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -108,7 +110,7 @@ public class PersonController {
 	}	
 	
 	
-	@RequestMapping(value = RESTUrls.URL_PHONE_TYPES, method = RequestMethod.GET)
+	@GetMapping(value = RESTUrls.URL_PHONE_TYPES, produces = "application/json")
 	public ResponseEntity<List<PhoneTypeDTO>> getPhoneTypes() 
 	{
 		try {
@@ -126,7 +128,7 @@ public class PersonController {
 		}
 	}	
 
-	@RequestMapping(value = RESTUrls.URL_PERSON_CREATE, method = RequestMethod.POST)
+	@PostMapping(value = RESTUrls.URL_PERSON_CREATE, produces = "application/json")
     public PersonDTO personCreate(@RequestBody PersonDTO personDTO) {
 		
 		PersonDTO responseDTO = null;
@@ -141,7 +143,7 @@ public class PersonController {
 		return responseDTO;
     }		
 
-	@RequestMapping(value = RESTUrls.URL_PERSON_UPDATE, method = RequestMethod.POST)
+	@PostMapping(value = RESTUrls.URL_PERSON_UPDATE, produces = "application/json")
     public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) {
 		
 		PersonDTO responseDTO = null;
@@ -156,4 +158,5 @@ public class PersonController {
 		return responseDTO;
     }	
 	
+
 }
