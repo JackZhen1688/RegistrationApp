@@ -8,6 +8,8 @@ public class RESTUrls {
 	final public static String URL_PERSON_TYPES="/personTypes";
 	final public static String URL_PHONE_TYPES="/phoneTypes";
 
+	final public static String URL_POST_PERSON="/postPerson";
+	
 	final public static String URL_PERSON_CREATE="/personCreate";
 	final public static String URL_PERSON_UPDATE="/personUpdate";
 
