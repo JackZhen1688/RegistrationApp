@@ -132,6 +132,7 @@ public class PersonController {
 	@PostMapping(value = RESTUrls.URL_POST_PERSON, produces = "application/json")
     public PersonDTO postPerson(@RequestBody PersonDTO personDTO) {
 		
+		System.out.println("DTD=="+personDTO);
 		PersonDTO responseDTO = null;
 	
 		try {
@@ -143,37 +144,6 @@ public class PersonController {
 	
 		return responseDTO;
     }
-	
-	
-	@PostMapping(value = RESTUrls.URL_PERSON_CREATE, produces = "application/json")
-    public PersonDTO personCreate(@RequestBody PersonDTO personDTO) {
-		
-		PersonDTO responseDTO = null;
-	
-		try {
-			 responseDTO = personService.personCreate(personDTO);
-		} catch (Exception e) {
-		    //log.error(e.toString(), e);
-			e.printStackTrace();
-		}
-	
-		return responseDTO;
-    }		
 
-	@PostMapping(value = RESTUrls.URL_PERSON_UPDATE, produces = "application/json")
-    public PersonDTO updatePerson(@RequestBody PersonDTO personDTO) {
-		
-		PersonDTO responseDTO = null;
-	
-		try {
-			 responseDTO = personService.personUpdate(personDTO);
-		} catch (Exception e) {
-		     //log.error(e.toString(), e);
-			 e.printStackTrace();
-		}
-	
-		return responseDTO;
-    }	
-	
 
 }

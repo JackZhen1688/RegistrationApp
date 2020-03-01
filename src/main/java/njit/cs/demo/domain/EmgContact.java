@@ -25,16 +25,16 @@ public class EmgContact {
 	private Long id;     
 
 	@Column(name="\"CONTACT_NAME\"")
-	private String ctName;
+	private String contactName;
 	
 	@Column(name="\"CONTACT_RELATION\"")
-	private String ctRelation;
+	private String contactRelation;
 	
 	@Column(name="\"CONTACT_PHONE\"")
-	private String ctPhone;
+	private String contactPhone;
 	
 	@Column(name="\"CONTACT_EMAIL\"")
-	private String ctEmail;
+	private String contactEmail;
 	
 	
 	@OneToOne(fetch = FetchType.LAZY)

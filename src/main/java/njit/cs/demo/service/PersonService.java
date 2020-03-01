@@ -121,10 +121,10 @@ public class PersonService {
 				EmgContactDTO emgContactDTO = new EmgContactDTO();
 				if (emgContact != null) {
 					emgContactDTO.setId(emgContact.getId());
-					emgContactDTO.setCtName(emgContact.getCtName());
-					emgContactDTO.setCtRelation(emgContact.getCtRelation());
-					emgContactDTO.setCtPhone(emgContact.getCtPhone());
-					emgContactDTO.setCtEmail(emgContact.getCtEmail());
+					emgContactDTO.setContactName(emgContact.getContactName());
+					emgContactDTO.setContactRelation(emgContact.getContactRelation());
+					emgContactDTO.setContactPhone(emgContact.getContactPhone());
+					emgContactDTO.setContactEmail(emgContact.getContactEmail());
 				}
 				return emgContactDTO;
 			}
@@ -245,7 +245,7 @@ public class PersonService {
 				if (emgContact != null)
 				    toEmgContactDomain.accept(personDTO.getEmgContact(), emgContact.get());
 		    } else {
-		    	if (personDTO.getEmgContact().getCtName() != null ) {
+		    	if (personDTO.getEmgContact().getContactName() != null ) {
 					EmgContact emgContact = toNewEmgContactDomain.apply(personDTO.getEmgContact());
 					emgContact.setPerson(person);                                     
 					person.setEmgContact(emgContact);
@@ -273,10 +273,10 @@ public class PersonService {
 	    @Override
 	    public EmgContact apply(EmgContactDTO emgContactDTO) {
 	    	EmgContact emgContact = new EmgContact();
-	    	emgContact.setCtName(emgContactDTO.getCtName());
-	    	emgContact.setCtRelation(emgContactDTO.getCtRelation());
-	    	emgContact.setCtPhone(emgContactDTO.getCtPhone());
-	    	emgContact.setCtEmail(emgContactDTO.getCtEmail());
+	    	emgContact.setContactName(emgContactDTO.getContactName());
+	    	emgContact.setContactRelation(emgContactDTO.getContactRelation());
+	    	emgContact.setContactPhone(emgContactDTO.getContactPhone());
+	    	emgContact.setContactEmail(emgContactDTO.getContactEmail());
 	    	
 			return emgContact;
 	    }
@@ -286,10 +286,10 @@ public class PersonService {
 
 	    @Override
 	    public void accept(EmgContactDTO emgContactDTO, EmgContact emgContact) {
-	    	emgContact.setCtName(emgContactDTO.getCtName());
-	    	emgContact.setCtRelation(emgContactDTO.getCtRelation());
-	    	emgContact.setCtPhone(emgContactDTO.getCtPhone());
-	    	emgContact.setCtEmail(emgContactDTO.getCtEmail());
+	    	emgContact.setContactName(emgContactDTO.getContactName());
+	    	emgContact.setContactRelation(emgContactDTO.getContactRelation());
+	    	emgContact.setContactPhone(emgContactDTO.getContactPhone());
+	    	emgContact.setContactEmail(emgContactDTO.getContactEmail());
 	    }
 	};
 	

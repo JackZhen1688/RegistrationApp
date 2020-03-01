@@ -7,10 +7,10 @@ import lombok.Data;
 public class EmgContactDTO {
 
 	private Long id;     
-	private String ctName;
-	private String ctRelation;
-	private String ctPhone;
-	private String ctEmail;
+	private String contactName;
+	private String contactRelation;
+	private String contactPhone;
+	private String contactEmail;
 	//private String perId;  <-- Ignore mapping column
 	
 }
