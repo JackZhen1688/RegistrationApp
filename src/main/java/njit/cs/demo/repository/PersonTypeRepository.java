@@ -10,4 +10,6 @@ public interface PersonTypeRepository extends BaseRepository<PersonType, Long>{
 
 	public List<PersonType> findAll();
 	
+	public PersonType findByType(String type);
+	
 }

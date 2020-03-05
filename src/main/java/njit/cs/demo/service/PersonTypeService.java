@@ -48,5 +48,13 @@ public class PersonTypeService {
 		}
 	};
 	
+	public PersonTypeDTO getPersonTypeByType(String type) 
+	{	
+		PersonType personType=  personTypeRepository.findByType(type);
+		
+		PersonTypeDTO personTypeDTO = toPersonTypeDTO.apply(personType);
+		
+		return personTypeDTO;
+	}
 	
 }

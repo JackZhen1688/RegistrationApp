@@ -128,6 +128,24 @@ public class PersonController {
 		}
 	}	
 
+	@RequestMapping(value = RESTUrls.URL_PERSON_TYPE_BY_TYPE, method = RequestMethod.GET)
+	public ResponseEntity<PersonTypeDTO> getPersonTypeByType(@PathVariable String type) 
+	{
+		try {
+			PersonTypeDTO personTypeDTO = personTypeService.getPersonTypeByType(type);
+			
+			if (personTypeDTO == null)
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			 
+			return new ResponseEntity<PersonTypeDTO>(personTypeDTO, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			//log.error("Error calling contractService.get()", e);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 
 	@PostMapping(value = RESTUrls.URL_POST_PERSON, produces = "application/json")
     public PersonDTO postPerson(@RequestBody PersonDTO personDTO) {

@@ -139,7 +139,8 @@ public class PersonService {
 			if (phones != null) {
 				phonesDTO.setId(phones.getId());
 				//phonesDTO.setPtyId(phones.getPtyId());
-				phonesDTO.setPhoneType(toPhoneTypeDTO.apply(phones.getPhoneType()));
+				//phonesDTO.setPhoneType(toPhoneTypeDTO.apply(phones.getPhoneType()));
+				phonesDTO.setPhoneType(phones.getPhoneType());
 				phonesDTO.setPhone(phones.getPhone());
 			}
 
@@ -299,7 +300,8 @@ public class PersonService {
 	    public Phones apply(PhonesDTO phonesDTO) {
 			Phones phones = new Phones();
 			//phones.setPtyId(phonesDTO.getPtyId()); 
-			phones.setPhoneType(toNewPhoneTypeDomain.apply(phonesDTO.getPhoneType()));
+			//phones.setPhoneType(toNewPhoneTypeDomain.apply(phonesDTO.getPhoneType()));
+			phones.setPhoneType(phonesDTO.getPhoneType());
 			phones.setPhone(phonesDTO.getPhone());
 
 			return phones;
