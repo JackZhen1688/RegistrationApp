@@ -22,7 +22,7 @@ public class PersonType implements Serializable {
 	
 		@Id
 		@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id_Sequence")
-		@SequenceGenerator(name="id_Sequence", schema="Public", sequenceName="SEQ_PERTYPE", allocationSize=1)
+		@SequenceGenerator(name="id_Sequence", schema="Public", sequenceName="\"SEQ_PERTYPE\"", allocationSize=1)
 		@Column(name="\"PERT_ID\"", unique=true, nullable=false)         
 		private Long id;                                   	    
 		                                                             

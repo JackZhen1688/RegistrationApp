@@ -154,7 +154,7 @@ public class PersonController {
 		PersonDTO responseDTO = null;
 	
 		try {
-			 //responseDTO = personService.personCreate(personDTO);
+			 responseDTO = personService.personCreate(personDTO);
 		} catch (Exception e) {
 		    //log.error(e.toString(), e);
 			e.printStackTrace();
