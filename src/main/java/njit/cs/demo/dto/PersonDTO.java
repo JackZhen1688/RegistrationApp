@@ -14,7 +14,7 @@ import lombok.Data;
 public class PersonDTO {
 
 	private Long id;     
-    //private Long pertId; <-- Ignore mapping column
+    private Long pertId; 
 	private String userId;
 	private String password;
 	private String firstName;
@@ -24,7 +24,7 @@ public class PersonDTO {
 	@JsonSerialize(using   = CustomDateSerializer.class)
 	private Date birthDay;
 	
-	private PersonTypeDTO personType;
+	//private PersonTypeDTO personType;
 	private EmgContactDTO emgContact; 
     private List<PhonesDTO> phones = Lists.newArrayList();  
     

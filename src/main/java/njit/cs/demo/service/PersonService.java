@@ -83,8 +83,8 @@ public class PersonService {
 			try {
 						
 				personDTO.setId(person.getId());	
-				//personDTO.setPertId(person.getPertId());  
-				personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
+				personDTO.setPertId(person.getPertId());  
+				//personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
 				personDTO.setUserId(person.getUserId());
 				personDTO.setPassword(person.getPassword());
 				personDTO.setSsn(person.getSsn());
@@ -175,8 +175,8 @@ public class PersonService {
 		public Person apply(PersonDTO personDTO) 
 		{
 			Person person = new Person();
-			//person.setPertId(personDTO.getPertId());   
-			person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
+			person.setPertId(personDTO.getPertId());   
+			//person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
@@ -231,8 +231,8 @@ public class PersonService {
 		@Override
 		public void accept(PersonDTO personDTO, Person person) {
 	
-		    //person.setPertId(personDTO.getPertId());   
-			person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
+		    person.setPertId(personDTO.getPertId());   
+			//person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());

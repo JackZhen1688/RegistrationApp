@@ -57,13 +57,13 @@ public class Person implements Serializable {
     /*--------------------------------------
      * Ignore when column is used by mapping
      *--------------------------------------*/
-    //@Column(name = "\"PERT_ID\"", insertable=false, updatable=false)
-    //private Long pertId;
+    @Column(name = "\"PERT_ID\"")
+    private Long pertId;
     
 	//Person(Foreign key:PERT_ID) --> PersonType(Primary key:PERT_ID)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "\"PERT_ID\"")
-    private PersonType personType;
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "\"PERT_ID\"")
+    //private PersonType personType;
     
     //Person(Primary key:PER_ID) --> EmgContact(Foreign key:PER_ID)
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)     

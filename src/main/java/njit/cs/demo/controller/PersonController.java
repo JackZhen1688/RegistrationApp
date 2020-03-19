@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import lombok.extern.log4j.Log4j2;
 import njit.cs.demo.dto.PersonDTO;
 import njit.cs.demo.dto.PersonTypeDTO;
@@ -24,6 +24,7 @@ import njit.cs.demo.service.PhoneTypeService;
 @Log4j2
 @RestController
 @RequestMapping(produces = "application/json")
+@CrossOrigin(origins = "*")
 public class PersonController {
 
 	@Autowired
@@ -37,6 +38,7 @@ public class PersonController {
 	
 	
 	@RequestMapping(value = RESTUrls.URL_PERSON_ALL, method = RequestMethod.GET)
+	
 	public ResponseEntity<List<PersonDTO>> findAllPerson() 
 	{
 		try {
@@ -154,7 +156,8 @@ public class PersonController {
 		PersonDTO responseDTO = null;
 	
 		try {
-			 responseDTO = personService.personCreate(personDTO);
+			 //responseDTO = personService.personCreate(personDTO);
+			responseDTO = personService.personUpdate(personDTO);
 		} catch (Exception e) {
 		    //log.error(e.toString(), e);
 			e.printStackTrace();

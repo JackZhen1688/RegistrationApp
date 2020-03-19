@@ -29,7 +29,7 @@ public class PersonType implements Serializable {
 		@Column(name="\"PERSON_TYPE\"")
 		private String type;
 
-		@OneToOne(mappedBy = "personType")
-	    private Person person;
+		//@OneToOne(mappedBy = "personType")
+	    //private Person person;
 
 }
