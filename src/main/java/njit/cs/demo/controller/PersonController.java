@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -156,15 +157,34 @@ public class PersonController {
 		PersonDTO responseDTO = null;
 	
 		try {
-			 //responseDTO = personService.personCreate(personDTO);
-			responseDTO = personService.personUpdate(personDTO);
+			 if (personDTO.getId() == null)
+			     responseDTO = personService.personCreate(personDTO);
+			 else
+			     responseDTO = personService.personUpdate(personDTO);
 		} catch (Exception e) {
-		    //log.error(e.toString(), e);
+		    //log.error("Error calling postPerson()", e);
 			e.printStackTrace();
 		}
 	
 		return responseDTO;
     }
+	
 
+	@DeleteMapping(value = RESTUrls.URL_DELETE_PERSON, produces = "application/json")
+    public void deletePerson(@PathVariable String id) {
+		
+		System.out.println("id=="+id);
+	
+		try {
+			 Long perId = Long.parseLong(id);
+		     personService.personDelete(perId);
+		     
+		} catch (Exception e) {
+		    //log.error("Error calling postPerson()", e);
+			e.printStackTrace();
+		}
+	
+    }
+	
 
 }

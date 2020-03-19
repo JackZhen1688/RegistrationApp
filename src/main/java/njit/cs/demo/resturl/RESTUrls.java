@@ -11,5 +11,6 @@ public class RESTUrls {
 	final public static String URL_PHONE_TYPES="/phoneTypes";
 
 	final public static String URL_POST_PERSON="/postPerson";
+	final public static String URL_DELETE_PERSON="/deletePerson/{id}";
 
 }

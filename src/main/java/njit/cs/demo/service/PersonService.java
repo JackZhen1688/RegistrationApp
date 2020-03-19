@@ -319,4 +319,10 @@ public class PersonService {
 	    }
 	}; 	
 	
+	//6.Delete a Existing Person
+	public void personDelete(Long id ) {
+	    
+		    personRepository.deleteById(id);
+	}
+	
 }
