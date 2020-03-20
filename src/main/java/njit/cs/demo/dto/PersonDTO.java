@@ -23,8 +23,7 @@ public class PersonDTO {
 	@JsonDeserialize(using = CustomDateDeserializer.class)     // java.util.Date object with JSON format
 	@JsonSerialize(using   = CustomDateSerializer.class)
 	private Date birthDay;
-	
-	//private PersonTypeDTO personType;
+	private AddressDTO address;
 	private EmgContactDTO emgContact; 
     private List<PhonesDTO> phones = Lists.newArrayList();  
     

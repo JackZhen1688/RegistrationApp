@@ -51,8 +51,7 @@ public class PersonController {
 			return new ResponseEntity<List<PersonDTO>>(personDTOList, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -69,8 +68,7 @@ public class PersonController {
 			return new ResponseEntity<PersonDTO>(personDTO, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -104,8 +102,7 @@ public class PersonController {
 			return new ResponseEntity<List<PersonTypeDTO>>(personTypeDTOList, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}	

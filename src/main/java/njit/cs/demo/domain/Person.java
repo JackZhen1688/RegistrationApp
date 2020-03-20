@@ -53,17 +53,16 @@ public class Person implements Serializable {
 	@Column(name="\"BIRTH_DAY\"")
 	private Date birthDay;
 	
-	
-    /*--------------------------------------
-     * Ignore when column is used by mapping
-     *--------------------------------------*/
     @Column(name = "\"PERT_ID\"")
     private Long pertId;
     
-	//Person(Foreign key:PERT_ID) --> PersonType(Primary key:PERT_ID)
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "\"PERT_ID\"")
-    //private PersonType personType;
+    /*--------------------------------------
+     * Ignore when column is used by mapping
+     *--------------------------------------*/
+    //Person(Foreign key:ADD_ID) --> Address(Primary key:ADD_ID)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "\"ADD_ID\"")
+    private Address address;
     
     //Person(Primary key:PER_ID) --> EmgContact(Foreign key:PER_ID)
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)     

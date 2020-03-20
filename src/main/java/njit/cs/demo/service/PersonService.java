@@ -11,16 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.log4j.Log4j2;
+import njit.cs.demo.domain.Address;
 import njit.cs.demo.domain.EmgContact;
 import njit.cs.demo.domain.Person;
 import njit.cs.demo.domain.PersonType;
 import njit.cs.demo.domain.PhoneType;
 import njit.cs.demo.domain.Phones;
+import njit.cs.demo.dto.AddressDTO;
 import njit.cs.demo.dto.EmgContactDTO;
 import njit.cs.demo.dto.PersonDTO;
 import njit.cs.demo.dto.PersonTypeDTO;
 import njit.cs.demo.dto.PhoneTypeDTO;
 import njit.cs.demo.dto.PhonesDTO;
+import njit.cs.demo.repository.AddressRepository;
 import njit.cs.demo.repository.EmgRepository;
 import njit.cs.demo.repository.PersonRepository;
 import njit.cs.demo.repository.PhonesRepository;
@@ -36,6 +39,9 @@ public class PersonService {
 	
 	@Autowired
 	private PhonesRepository phonesRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private EmgRepository emgRepository;
@@ -101,13 +107,13 @@ public class PersonService {
 						
 				personDTO.setId(person.getId());	
 				personDTO.setPertId(person.getPertId());  
-				//personDTO.setPersonType(toPersonTypeDTO.apply(person.getPersonType()));
 				personDTO.setUserId(person.getUserId());
 				personDTO.setPassword(person.getPassword());
 				personDTO.setSsn(person.getSsn());
 				personDTO.setFirstName(person.getFirstName());
 				personDTO.setLastName(person.getLastName());
 				personDTO.setBirthDay(person.getBirthDay());
+				personDTO.setAddress(toAddressDTO.apply(person.getAddress()));
 				personDTO.setEmgContact(toEmgContactDTO.apply(person.getEmgContact()));
 				personDTO.setPhones(person.getPhoneList().stream()
 						 .map(toPhonesDTO).collect(Collectors.toList()));
@@ -119,16 +125,19 @@ public class PersonService {
 			return personDTO;
 		}
 	};
-	
-	private Function<PersonType, PersonTypeDTO> toPersonTypeDTO = new Function<PersonType, PersonTypeDTO>() {
+
+	private Function<Address, AddressDTO> toAddressDTO = new Function<Address, AddressDTO>() {
 		@Override
-		public PersonTypeDTO apply(PersonType personType) {
-			    PersonTypeDTO personTypeDTO = new PersonTypeDTO();
-				if (personType != null) {
-					personTypeDTO.setId(personType.getId());
-					personTypeDTO.setType(personType.getType());
+		public AddressDTO apply(Address address) {
+			   AddressDTO addressDTO = new AddressDTO();
+				if (address != null) {
+					addressDTO.setId(address.getId());
+					addressDTO.setStreet(address.getStreet());
+					addressDTO.setCity(address.getCity());
+					addressDTO.setState(address.getState());
+					addressDTO.setZip(String.valueOf(address.getZip()));
 				}
-				return personTypeDTO;
+				return addressDTO;
 			}
 	};
 
@@ -155,8 +164,6 @@ public class PersonService {
 
 			if (phones != null) {
 				phonesDTO.setId(phones.getId());
-				//phonesDTO.setPtyId(phones.getPtyId());
-				//phonesDTO.setPhoneType(toPhoneTypeDTO.apply(phones.getPhoneType()));
 				phonesDTO.setPhoneType(phones.getPhoneType());
 				phonesDTO.setPhone(phones.getPhone());
 			}
@@ -165,18 +172,7 @@ public class PersonService {
 		}
     };
     
-	private Function<PhoneType, PhoneTypeDTO> toPhoneTypeDTO = new Function<PhoneType, PhoneTypeDTO>() {
-		@Override
-		public PhoneTypeDTO apply(PhoneType phoneType) {
-			    PhoneTypeDTO phoneTypeDTO = new PhoneTypeDTO();
-				if (phoneType != null) {
-					phoneTypeDTO.setId(phoneType.getId());
-					phoneTypeDTO.setType(phoneType.getType());
-				}
-				return phoneTypeDTO;
-			}
-	};
-	
+
     //4.Create a New Person 
 	public PersonDTO personCreate(PersonDTO personDTO) {
 		
@@ -193,14 +189,14 @@ public class PersonService {
 		{
 			Person person = new Person();
 			person.setPertId(personDTO.getPertId());   
-			//person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
 		    person.setFirstName(personDTO.getFirstName());
 		    person.setLastName(personDTO.getLastName());
 		    person.setBirthDay(personDTO.getBirthDay());
-		    
+			person.setAddress(toNewAddressDomain.apply(personDTO.getAddress()));
+    
 			EmgContact emgContact = toNewEmgContactDomain.apply(personDTO.getEmgContact());
 			emgContact.setPerson(person);                                     
 			person.setEmgContact(emgContact);
@@ -216,7 +212,8 @@ public class PersonService {
 			return person;
 		}
 	};	
-    
+	
+
 	Function<PersonTypeDTO, PersonType> toNewPersonTypeDomain = new Function<PersonTypeDTO, PersonType>() {
 		
 	    @Override
@@ -226,7 +223,7 @@ public class PersonService {
 
 			return personType;
 	    }
-	}; 	
+	};	
 	
 	//5.Update a Existing Person
 	public PersonDTO personUpdate(PersonDTO personDTO) {
@@ -249,13 +246,17 @@ public class PersonService {
 		public void accept(PersonDTO personDTO, Person person) {
 	
 		    person.setPertId(personDTO.getPertId());   
-			//person.setPersonType(toNewPersonTypeDomain.apply(personDTO.getPersonType()));
 		    person.setUserId(personDTO.getUserId().toUpperCase());
 		    person.setPassword(personDTO.getPassword());
 		    person.setSsn(personDTO.getSsn());
 		    person.setFirstName(personDTO.getFirstName());
 		    person.setLastName(personDTO.getLastName());
 		    person.setBirthDay(personDTO.getBirthDay());
+		    if (personDTO.getAddress().getId() != null) {
+		    	Optional<Address> address = addressRepository.findById(personDTO.getAddress().getId());
+		    	if (address != null)
+			        toAddressDomain.accept(personDTO.getAddress(), address.get());
+		    }
 
 		    if (personDTO.getEmgContact().getId() != null) {
 				//EmgContact emgContact = emgRepository.findOne(personDTO.getEmgContact().getId());
@@ -285,7 +286,21 @@ public class PersonService {
 		
     };
     
-    
+
+	Function<AddressDTO, Address> toNewAddressDomain = new Function<AddressDTO, Address>() {
+		
+	    @Override
+	    public Address apply(AddressDTO addressDTO) {
+	    	Address address = new Address();
+	    	address.setStreet(addressDTO.getStreet());
+	    	address.setCity(addressDTO.getCity());
+	    	address.setState(addressDTO.getState());
+	    	address.setZip(Long.parseLong(addressDTO.getZip()));
+	    	
+			return address;
+	    }
+	}; 
+	
 	Function<EmgContactDTO, EmgContact> toNewEmgContactDomain = new Function<EmgContactDTO, EmgContact>() {
 		
 	    @Override
@@ -299,6 +314,18 @@ public class PersonService {
 			return emgContact;
 	    }
 	};  
+
+	BiConsumer<AddressDTO, Address> toAddressDomain = new BiConsumer<AddressDTO, Address>() {
+
+	    @Override
+	    public void accept(AddressDTO addressDTO, Address address) {
+	    	address.setStreet(addressDTO.getStreet());
+	    	address.setCity(addressDTO.getCity());
+	    	address.setState(addressDTO.getState());
+	    	if (addressDTO.getZip() != null)
+	    	    address.setZip(Long.parseLong(addressDTO.getZip()));
+	    }
+	};
 	
 	BiConsumer<EmgContactDTO, EmgContact> toEmgContactDomain = new BiConsumer<EmgContactDTO, EmgContact>() {
 
@@ -316,8 +343,6 @@ public class PersonService {
 	    @Override
 	    public Phones apply(PhonesDTO phonesDTO) {
 			Phones phones = new Phones();
-			//phones.setPtyId(phonesDTO.getPtyId()); 
-			//phones.setPhoneType(toNewPhoneTypeDomain.apply(phonesDTO.getPhoneType()));
 			phones.setPhoneType(phonesDTO.getPhoneType());
 			phones.setPhone(phonesDTO.getPhone());
 
