@@ -75,7 +75,6 @@ public class PersonController {
 		}
 	}
 	
-	
 	@RequestMapping(value = RESTUrls.URL_PERSON_BY_SSN, method = RequestMethod.GET)
 	public ResponseEntity<PersonDTO> getPersonBySsn(@PathVariable Long ssn) 
 	{
@@ -88,8 +87,7 @@ public class PersonController {
 			return new ResponseEntity<PersonDTO>(personDTO, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -125,8 +123,7 @@ public class PersonController {
 			return new ResponseEntity<List<PhoneTypeDTO>>(phoneTypeDTOList, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}	
@@ -143,8 +140,7 @@ public class PersonController {
 			return new ResponseEntity<PersonTypeDTO>(personTypeDTO, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			//log.error("Error calling contractService.get()", e);
-			e.printStackTrace();
+			log.error("Error calling contractService.get()", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -162,8 +158,7 @@ public class PersonController {
 			 else
 			     responseDTO = personService.personUpdate(personDTO);
 		} catch (Exception e) {
-		    //log.error("Error calling postPerson()", e);
-			e.printStackTrace();
+		     log.error("Error calling postPerson()", e);
 		}
 	
 		return responseDTO;
@@ -173,15 +168,12 @@ public class PersonController {
 	@DeleteMapping(value = RESTUrls.URL_DELETE_PERSON, produces = "application/json")
     public void deletePerson(@PathVariable String id) {
 		
-		System.out.println("id=="+id);
-	
 		try {
 			 Long perId = Long.parseLong(id);
 		     personService.personDelete(perId);
 		     
 		} catch (Exception e) {
-		    //log.error("Error calling postPerson()", e);
-			e.printStackTrace();
+		     log.error("Error calling postPerson()", e);
 		}
 	
     }

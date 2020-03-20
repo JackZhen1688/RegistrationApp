@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,7 @@ public class PersonService {
 	
 	@Autowired
 	private EmgRepository emgRepository;
+	
 
 	//1.Retrieve Person All List
 	public List<PersonDTO> findAll() 
@@ -75,6 +77,21 @@ public class PersonService {
 		return personDTOs;
 	}
 
+	/* --------------------------------------------------
+	 * Using ModelMapper to replace with the long setting 
+	 * --------------------------------------------------*/
+	/*
+	private ModelMapper modelMapper = new ModelMapper();
+	private Function<Person, PersonDTO> toPersonDTO = new Function<Person, PersonDTO>() {
+
+		@Override
+		public PersonDTO apply(Person person)  {
+			return modelMapper.map(person, PersonDTO.class);
+		}
+
+	};
+	*/
+	
 	private Function<Person, PersonDTO> toPersonDTO = new Function<Person, PersonDTO>() {
 
 		public PersonDTO apply(Person person) {
@@ -97,7 +114,7 @@ public class PersonService {
 				
 
 			}catch(Exception e) {
-				//log.error(e.getMessage());
+				log.error("function error toPersonDTO()", e);
 			}
 			return personDTO;
 		}
@@ -322,7 +339,7 @@ public class PersonService {
 	//6.Delete a Existing Person
 	public void personDelete(Long id ) {
 	    
-		    personRepository.deleteById(id);
+		personRepository.deleteById(id);
 	}
 	
 }

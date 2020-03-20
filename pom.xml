@@ -83,7 +83,12 @@
     	    <artifactId>guava</artifactId>
     		<version>r05</version>
 		</dependency>	
-			
+		<dependency>
+		    <groupId>org.modelmapper</groupId>
+		    <artifactId>modelmapper</artifactId>
+		    <version>0.7.5</version>
+		</dependency>			
+		
 		<!-- API, java.xml.bind module -->
 		<dependency>
 		    <groupId>jakarta.xml.bind</groupId>
