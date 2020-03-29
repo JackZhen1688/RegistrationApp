@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 public class CustomDateDeserializer extends JsonDeserializer<Date> {
  
     private static SimpleDateFormat formatter = 
-      new SimpleDateFormat("MM/dd/yyyy");
+      new SimpleDateFormat("yyyy-MM-dd");
  
     @Override
     public Date deserialize(JsonParser jsonparser, DeserializationContext context)
