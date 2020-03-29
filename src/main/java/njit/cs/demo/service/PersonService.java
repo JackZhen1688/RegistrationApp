@@ -259,8 +259,7 @@ public class PersonService {
 		    }
 
 		    if (personDTO.getEmgContact().getId() != null) {
-				//EmgContact emgContact = emgRepository.findOne(personDTO.getEmgContact().getId());
-		    	Optional<EmgContact> emgContact =  emgRepository.findById(personDTO.getEmgContact().getId());
+		    	Optional<EmgContact> emgContact = emgRepository.findById(personDTO.getEmgContact().getId());
 				if (emgContact != null)
 				    toEmgContactDomain.accept(personDTO.getEmgContact(), emgContact.get());
 		    } else {
