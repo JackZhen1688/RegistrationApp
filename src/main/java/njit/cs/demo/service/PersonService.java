@@ -66,8 +66,10 @@ public class PersonService {
 	{	
 		Person person =  personRepository.findByUserIdAndPassword(uid, pwd);
 		
+		PersonDTO personDTO = new PersonDTO();
 		//#2.Copy the data from the List of the Domain Objects into List of the DTO Objects
-		PersonDTO personDTO = toPersonDTO.apply(person);
+		if (person != null)
+		    personDTO = toPersonDTO.apply(person);
 		//List<ContractDTO> listContractDTOs = Lists.transform(domainList, toContractDTO);
 		
 		return personDTO;
