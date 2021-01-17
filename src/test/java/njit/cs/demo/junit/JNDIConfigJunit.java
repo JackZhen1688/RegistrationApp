@@ -1,4 +1,4 @@
-package njit.cs.demo;
+package njit.cs.demo.junit;
 
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
