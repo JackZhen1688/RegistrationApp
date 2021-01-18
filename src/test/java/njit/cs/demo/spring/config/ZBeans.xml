@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+   <context:component-scan base-package="njit.cs.demo.spring"/>
+      <!-- 1. Using annotations dependencies injection
+	          @Resource, @Component, @repository and @Service define on the class
+	          @Autowired define on the inject object
+           2. the foo bean has been auto injected by component-scan 
+	   <bean id="foo" class="njit.cs.demo.spring.Foo" /> -->
+
+   <bean id="zSpellChecker" class="njit.cs.demo.spring.ZSpellChecker"/>
+	
+   <!-- Setter inject
+        Definition for textEditor bean using inner bean  -->
+   <bean id="textEditor" class="njit.cs.demo.spring.ZTextEditor">
+      <property name="fristName" value="jack"/>
+      <property name="zSpellChecker" ref="zSpellChecker"/>
+   </bean>
+
+   <!-- Constructor inject 
+   <bean id="textEditor" class="com.bac.apm.mycto.test.ZTextEditor">
+      <constructor-arg index="0" value="jack"/>
+      <constructor-arg index="1" ref="zSpellChecker"/>
+   </bean> -->
+   
+   
+</beans>
