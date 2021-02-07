@@ -7,9 +7,8 @@ import org.junit.runner.RunWith;
 //import org.junit.ComparisonFailure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import njit.cs.demo.Application;
 import njit.cs.demo.domain.PhoneType;
 import njit.cs.demo.repository.PhoneTypeRepository;
 import njit.cs.demo.service.PhoneTypeService;
@@ -18,13 +17,14 @@ import njit.cs.demo.service.PhoneTypeService;
 @SpringBootTest(classes = {
 	      	    Application.class, 
                 JNDIConfigJunit.class})
+@ContextConfiguration(classes = {PhoneTypeService.class})  // add due to no scan service in application
 public class SpringBootApplicationJunitTest {
 
 	@Autowired
-	PhoneTypeService phoneTypeService;
+	PhoneTypeService phoneTypeService;                     // no scan service in application (Invalid bean definition with name)
 	
 	@Autowired
-	PhoneTypeRepository phoneTypeRepository;
+	PhoneTypeRepository phoneTypeRepository;               // yes scan repository in application
 	
 	@Test
 	public void testPhoneTypeList() 
