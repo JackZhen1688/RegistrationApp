@@ -7,31 +7,41 @@ import org.junit.runner.RunWith;
 //import org.junit.ComparisonFailure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import njit.cs.demo.domain.PhoneType;
+import njit.cs.demo.controller.PersonController;
+import njit.cs.demo.dto.PhoneTypeDTO;
 import njit.cs.demo.repository.PhoneTypeRepository;
+import njit.cs.demo.service.PersonService;
+import njit.cs.demo.service.PersonTypeService;
 import njit.cs.demo.service.PhoneTypeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {
 	      	    Application.class, 
                 JNDIConfigJunit.class})
-@ContextConfiguration(classes = {PhoneTypeService.class})  // add due to no scan service in application
+@ContextConfiguration(classes = {PersonController.class, PersonService.class, PhoneTypeService.class, PersonTypeService.class})  
+                                                           // add due to no scan service in RegistrationApp
 public class SpringBootApplicationJunitTest {
 
 	@Autowired
-	PhoneTypeService phoneTypeService;                     // no scan service in application (Invalid bean definition with name)
+	PersonController personController;                     // include PersonService, PersonTypeService, PhoneTYpeService
 	
 	@Autowired
-	PhoneTypeRepository phoneTypeRepository;               // yes scan repository in application
+	PhoneTypeService phoneTypeService;                     // no scan service in RegistrationApp (Invalid bean definition with name)
+	
+	@Autowired
+	PhoneTypeRepository phoneTypeRepository;               // yes scan repository in RegistrationApp
 	
 	@Test
 	public void testPhoneTypeList() 
 	{				
 		try {
-			//List<PhoneTypeDTO> phoneTypeDTOList = phoneTypeService.listAll();   //Service level JUnit Test
-			List<PhoneType> phoneTypeList = phoneTypeRepository.findAll();		  //Method level JUnit Test
+			ResponseEntity<List<PhoneTypeDTO>> phoneTypes= personController.getPhoneTypes();		
+			List<PhoneTypeDTO> phoneTypeList = phoneTypes.getBody();
+			//List<PhoneTypeDTO> phoneTypeDTOList = phoneTypeService.listAll();       //Service level JUnit Test
+			//List<PhoneType> phoneTypeList = phoneTypeRepository.findAll();		  //Method level JUnit Test
 			//assertEquals(2, phoneTypeList.size());
 			Assert.assertTrue(phoneTypeList.size() > 0);
 			
