@@ -23,8 +23,6 @@ import njit.cs.demo.dto.PersonDTO;
 import njit.cs.demo.dto.PersonTypeDTO;
 import njit.cs.demo.dto.PhoneTypeDTO;
 import njit.cs.demo.dto.PhonesDTO;
-import njit.cs.demo.repository.AddressRepository;
-import njit.cs.demo.repository.EmgRepository;
 import njit.cs.demo.repository.PersonRepository;
 import njit.cs.demo.repository.PhonesRepository;
 
@@ -39,13 +37,6 @@ public class PersonService {
 	
 	@Autowired
 	private PhonesRepository phonesRepository;
-
-	@Autowired
-	private AddressRepository addressRepository;
-	
-	@Autowired
-	private EmgRepository emgRepository;
-	
 
 	//1.Retrieve Person All List
 	public List<PersonDTO> findAll() 
@@ -137,7 +128,10 @@ public class PersonService {
 					addressDTO.setStreet(address.getStreet());
 					addressDTO.setCity(address.getCity());
 					addressDTO.setState(address.getState());
-					addressDTO.setZip(String.valueOf(address.getZip()));
+					if (address.getZip() == 0)
+					    addressDTO.setZip("");
+					else
+						addressDTO.setZip(String.valueOf(address.getZip()));
 				}
 				return addressDTO;
 			}
@@ -254,23 +248,16 @@ public class PersonService {
 		    person.setFirstName(personDTO.getFirstName());
 		    person.setLastName(personDTO.getLastName());
 		    person.setBirthDay(personDTO.getBirthDay());
-		    if (personDTO.getAddress().getId() != null) {
-		    	Optional<Address> address = addressRepository.findById(personDTO.getAddress().getId());
-		    	if (address != null)
-			        toAddressDomain.accept(personDTO.getAddress(), address.get());
-		    }
+		    
+		   	Address address = person.getAddress();
+		    if (address != null)
+		    	//personDTO.getAddress().getId() != null always true, So update will be all the time
+			    toAddressDomain.accept(personDTO.getAddress(), address); 
 
-		    if (personDTO.getEmgContact().getId() != null) {
-		    	Optional<EmgContact> emgContact = emgRepository.findById(personDTO.getEmgContact().getId());
-				if (emgContact != null)
-				    toEmgContactDomain.accept(personDTO.getEmgContact(), emgContact.get());
-		    } else {
-		    	if (personDTO.getEmgContact().getContactName() != null ) {
-					EmgContact emgContact = toNewEmgContactDomain.apply(personDTO.getEmgContact());
-					emgContact.setPerson(person);                                     
-					person.setEmgContact(emgContact);
-		    	}
-		    }
+		   	EmgContact emgContact = person.getEmgContact();
+			if (emgContact != null)
+				//personDTO.getEmgContact().getId() != null always true, So update will be all the time
+			    toEmgContactDomain.accept(personDTO.getEmgContact(), emgContact);
 				
 			phonesRepository.deleteInBatch(person.getPhoneList());
 			person.getPhoneList().clear();
@@ -296,7 +283,10 @@ public class PersonService {
 	    	address.setStreet(addressDTO.getStreet());
 	    	address.setCity(addressDTO.getCity());
 	    	address.setState(addressDTO.getState());
-	    	address.setZip(Long.parseLong(addressDTO.getZip()));
+	    	if (addressDTO.getZip() == null || addressDTO.getZip().isEmpty())
+	    		address.setZip(Long.parseLong("0"));
+	    	else
+	    	    address.setZip(Long.parseLong(addressDTO.getZip()));
 	    	
 			return address;
 	    }
@@ -323,8 +313,11 @@ public class PersonService {
 	    	address.setStreet(addressDTO.getStreet());
 	    	address.setCity(addressDTO.getCity());
 	    	address.setState(addressDTO.getState());
-	    	if (addressDTO.getZip() != null)
-	    	    address.setZip(Long.parseLong(addressDTO.getZip()));
+	    	if (addressDTO.getZip() == null || addressDTO.getZip().isEmpty())
+	    	    address.setZip(Long.parseLong("0"));
+	    	else
+	    		address.setZip(Long.parseLong(addressDTO.getZip()));
+	    		
 	    }
 	};
 	
